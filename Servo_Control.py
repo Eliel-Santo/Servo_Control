@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-import pigpio #sudo apt-get install python3-pigpio
+import pigpio #Run this command everytime: sudo apt-get install python3-pigpio; sudo pigpiod
 import time
 
 #POrtas para os PWM de cada Servo
