@@ -1,8 +1,9 @@
 import RPi.GPIO as GPIO
 import pigpio #Run this command everytime: sudo apt-get install python3-pigpio; sudo pigpiod
 import time
+import math
 
-#POrtas para os PWM de cada Servo
+#Portas para os PWM de cada Servo
 servo_H = 17
 servo_V = 18
 
@@ -18,12 +19,12 @@ pwm.set_mode(servo_V, pigpio.OUTPUT)
 pwm.set_PWM_frequency( servo_V, 50 )
 
 
-def func(x): #Retorna o valor em segundos da rotacao em graus desejada
-    return ((2500-500)/(180-0))*x+500 #FUncao de primeiro grau
+def func(x): #Retorna o valor em segundos [para o t_{on} do PWM] da rotacao em graus desejada
+    return ((2500-500)/(180-0))*x+500 #Funcao de primeiro grau
 
 
 
-def Controle_Manual(angulo_H=0,angulo_V=0,slp=1):
+def Controle_Manual(angulo_H=0,angulo_V=0,slp=1): # 'angulo_H' [em graus] e 'angulo_V' [em graus] define o angulo de rotação e 'slp' o tempo entre comandos [em segundos]
        
        if (float(angulo_H)<0 or float(angulo_H)>180) or (float(angulo_V)<0 or float(angulo_V)>180):
            #Desliga os Servos
@@ -38,7 +39,7 @@ def Controle_Manual(angulo_H=0,angulo_V=0,slp=1):
            time.sleep( slp )
            
 
-def Controle_Manual_H(angulo_H,slp=1):
+def Controle_Manual_H(angulo_H,slp=1): # 'angulo_H' [em graus] define o angulo de rotação e 'slp' o tempo entre comandos [em segundos]
        
        if (float(angulo_H)<0 or float(angulo_H)>180):
            #Desliga os Servos
@@ -49,7 +50,7 @@ def Controle_Manual_H(angulo_H,slp=1):
            pwm.set_servo_pulsewidth( servo_H, func(float(angulo_H))) ;
            time.sleep( slp )
 
-def Controle_Manual_V(angulo_V,slp=1):
+def Controle_Manual_V(angulo_V,slp=1): # 'angulo_V' [em graus] define o angulo de rotação e 'slp' o tempo entre comandos [em segundos]
        
        if (float(angulo_V)<0 or float(angulo_V)>180):
            #Desliga os Servos
@@ -61,7 +62,7 @@ def Controle_Manual_V(angulo_V,slp=1):
            time.sleep( slp )
            
 
-def Varredura_Servos(x,passo=20):
+def Varredura_Servos(x,passo=20): # 'x' equivale a tempo [em segundos] de varredura e 'passo' a quantidade de passos dentro do tempo 'x'
     meio_passo = passo/2
     for i in range(0, 180, 180/meio_passo):
         Controle_Manual_H(i, x/meio_passo)
@@ -69,5 +70,31 @@ def Varredura_Servos(x,passo=20):
     for i in range(180, 0, -180/meio_passo):
         Controle_Manual_H(i, x/meio_passo)
 
-while True:
-    Controle_Manual_V(input("Rotacao_V: "),0.5)
+#https://www.raspberrypi.com/documentation/accessories/camera.html
+        
+def Center_Object_H(pos_H): # 'pos_H' [em pixel] e 'pos_V' [em pixel] definem o local do Objeto no plano da câmera e 'Resolucao_H' [em pixel] e 'Resolucao_V' [em pixel] a resolução da mesma
+    f=3.04; #Distancia focal da Câmera [em mm]; Informacao no datasheet
+    Sx=(1.12*10^-3); # Constante de transformação entre pixel para mm; Informação no datasheet
+    angulo_H=math.degrees(math.acos((1.0*pos_H*Sx)/f))
+    
+    Controle_Manual_H(angulo_H,2)
+
+    
+def Center_Object_V(pos_V): # 'pos_H' [em pixel] e 'pos_V' [em pixel] definem o local do Objeto no plano da câmera e 'Resolucao_H' [em pixel] e 'Resolucao_V' [em pixel] a resolução da mesma
+    f=3.04; #Distancia focal da Câmera [em mm]; Informacao no datasheet
+    Sx=(1.12*10^-3); # Constante de transformação entre pixel para mm; Informação no datasheet
+    angulo_V=math.degrees(math.acos((1.0*pos_V*Sx)/f))
+    
+    Controle_Manual_V(angulo_V,2)
+    
+    
+def Center_Object(pos_H,pos_V): # 'pos_H' [em pixel] e 'pos_V' [em pixel] definem o local do Objeto no plano da câmera e 'Resolucao_H' [em pixel] e 'Resolucao_V' [em pixel] a resolução da mesma
+    f=3.04; #Distancia focal da Câmera [em mm]; Informacao no datasheet
+    Sx=(1.12*10^-3); # Constante de transformação entre pixel para mm; Informação no datasheet
+    angulo_H=math.degrees(math.acos((1.0*pos_H*Sx)/f))
+    angulo_V=math.degrees(math.acos((1.0*pos_V*Sx)/f))
+    
+    Controle_Manual(angulo_H,angulo_V,2)
+        
+#while True:
+#    Controle_Manual_V(input("Rotacao_V: "),0.5)
