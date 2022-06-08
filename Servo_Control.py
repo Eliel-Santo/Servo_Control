@@ -37,6 +37,8 @@ def Controle_Manual(angulo_H=0,angulo_V=0,slp=1): # 'angulo_H' [em graus] e 'ang
            pwm.set_servo_pulsewidth( servo_H, func(float(angulo_H))) ;
            pwm.set_servo_pulsewidth( servo_V, func(float(angulo_V))) ;
            time.sleep( slp )
+
+       return func(float(angulo_H)), func(float(angulo_V)) 
            
 
 def Controle_Manual_H(angulo_H,slp=1): # 'angulo_H' [em graus] define o angulo de rotação e 'slp' o tempo entre comandos [em segundos]
@@ -50,6 +52,8 @@ def Controle_Manual_H(angulo_H,slp=1): # 'angulo_H' [em graus] define o angulo d
            pwm.set_servo_pulsewidth( servo_H, func(float(angulo_H))) ;
            time.sleep( slp )
 
+       return func(float(angulo_H))
+
 def Controle_Manual_V(angulo_V,slp=1): # 'angulo_V' [em graus] define o angulo de rotação e 'slp' o tempo entre comandos [em segundos]
        
        if (float(angulo_V)<0 or float(angulo_V)>180):
@@ -60,6 +64,8 @@ def Controle_Manual_V(angulo_V,slp=1): # 'angulo_V' [em graus] define o angulo d
        else:
            pwm.set_servo_pulsewidth( servo_V, func(float(angulo_V))) ;
            time.sleep( slp )
+
+       return func(float(angulo_V))
            
 
 def Varredura_Servos(x,passo=20): # 'x' equivale a tempo [em segundos] de varredura e 'passo' a quantidade de passos dentro do tempo 'x'
@@ -70,31 +76,52 @@ def Varredura_Servos(x,passo=20): # 'x' equivale a tempo [em segundos] de varred
     for i in range(180, 0, -180/meio_passo):
         Controle_Manual_H(i, x/meio_passo)
 
+    return 0
+
 #https://www.raspberrypi.com/documentation/accessories/camera.html
         
-def Center_Object_H(pos_H,Resolucao_H): # 'pos_H' [em pixel] e 'pos_V' [em pixel] definem o local do Objeto no plano da câmera e 'Resolucao_H' [em pixel] e 'Resolucao_V' [em pixel] a resolução da mesma
+def Center_Object_H(pos_H,Resolucao_H,Angulo_Atual): # 'pos_H' [em pixel] e 'pos_V' [em pixel] definem o local do Objeto no plano da câmera e 'Resolucao_H' [em pixel] e 'Resolucao_V' [em pixel] a resolução da mesma
     f=3.04; #Distancia focal da Câmera [em mm]; Informacao no datasheet
     Sx=(1.12*10^-3); # Constante de transformação entre pixel para mm; Informação no datasheet
-    angulo_H=math.degrees(math.atan((math.fabs(pos_H-Resolucao_H/2.0)*Sx)/f))
+    if pos_H>=Resolucao_H/2.0:
+        Sinal=1.0
+    else:
+        Sinal=-1.0
+    angulo_H=Angulo_Atual+Sinal*math.degrees(math.atan((math.fabs(pos_H-Resolucao_H/2.0)*Sx)/f))
     
-    Controle_Manual_H(angulo_H,1)
+    return Controle_Manual_H(angulo_H,1)
 
     
-def Center_Object_V(pos_V,Resolucao_V): # 'pos_H' [em pixel] e 'pos_V' [em pixel] definem o local do Objeto no plano da câmera e 'Resolucao_H' [em pixel] e 'Resolucao_V' [em pixel] a resolução da mesma
+def Center_Object_V(pos_V,Resolucao_V,Angulo_Atual): # 'pos_H' [em pixel] e 'pos_V' [em pixel] definem o local do Objeto no plano da câmera e 'Resolucao_H' [em pixel] e 'Resolucao_V' [em pixel] a resolução da mesma
     f=3.04; #Distancia focal da Câmera [em mm]; Informacao no datasheet
     Sx=(1.12*10^-3); # Constante de transformação entre pixel para mm; Informação no datasheet
-    angulo_V=math.degrees(math.atan((math.fabs(pos_V-Resolucao_V/2.0)*Sx)/f))
+    if pos_H>=Resolucao_H/2.0:
+        Sinal=1.0
+    else:
+        Sinal=-1.0
+
+    angulo_V=Angulo_Atual+Sinal*math.degrees(math.atan((math.fabs(pos_V-Resolucao_V/2.0)*Sx)/f))
     
-    Controle_Manual_V(angulo_V,1)
+    return Controle_Manual_V(angulo_V,1)
     
     
-def Center_Object(pos_H,pos_V,Resolucao_H,Resolucao_V): # 'pos_H' [em pixel] e 'pos_V' [em pixel] definem o local do Objeto no plano da câmera e 'Resolucao_H' [em pixel] e 'Resolucao_V' [em pixel] a resolução da mesma
+def Center_Object(pos_H,pos_V,Resolucao_H,Resolucao_V,Angulo_Atual): # 'pos_H' [em pixel] e 'pos_V' [em pixel] definem o local do Objeto no plano da câmera e 'Resolucao_H' [em pixel] e 'Resolucao_V' [em pixel] a resolução da mesma
     f=3.04; #Distancia focal da Câmera [em mm]; Informacao no datasheet
     Sx=(1.12*10^-3); # Constante de transformação entre pixel para mm; Informação no datasheet
-    angulo_H=math.degrees(math.atan((1.0*math.fabs(pos_H-Resolucao_H/2.0)*Sx)/f))
-    angulo_V=math.degrees(math.atan((1.0*math.fabs(pos_V-Resolucao_V/2.0)*Sx)/f))
+    if pos_H>=Resolucao_H/2.0:
+        Sinal_H=1.0
+    else:
+        Sinal_H=-1.0
+
+    if pos_V>=Resolucao_V/2.0:
+        Sinal_V=1.0
+    else:
+        Sinal_V=-1.0
+
+    angulo_H=Angulo_Atual+Sinal_H*math.degrees(math.atan((1.0*math.fabs(pos_H-Resolucao_H/2.0)*Sx)/f))
+    angulo_V=Angulo_Atual+Sinal_V*math.degrees(math.atan((1.0*math.fabs(pos_V-Resolucao_V/2.0)*Sx)/f))
     
-    Controle_Manual(angulo_H,angulo_V,1)
+    return Controle_Manual(angulo_H,angulo_V,1)
         
 #while True:
 #    Controle_Manual_V(input("Rotacao_V: "),0.5)
