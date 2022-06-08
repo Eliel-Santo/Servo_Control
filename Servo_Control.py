@@ -72,29 +72,29 @@ def Varredura_Servos(x,passo=20): # 'x' equivale a tempo [em segundos] de varred
 
 #https://www.raspberrypi.com/documentation/accessories/camera.html
         
-def Center_Object_H(pos_H): # 'pos_H' [em pixel] e 'pos_V' [em pixel] definem o local do Objeto no plano da câmera e 'Resolucao_H' [em pixel] e 'Resolucao_V' [em pixel] a resolução da mesma
+def Center_Object_H(pos_H,Resolucao_H): # 'pos_H' [em pixel] e 'pos_V' [em pixel] definem o local do Objeto no plano da câmera e 'Resolucao_H' [em pixel] e 'Resolucao_V' [em pixel] a resolução da mesma
     f=3.04; #Distancia focal da Câmera [em mm]; Informacao no datasheet
     Sx=(1.12*10^-3); # Constante de transformação entre pixel para mm; Informação no datasheet
-    angulo_H=math.degrees(math.acos((1.0*pos_H*Sx)/f))
+    angulo_H=math.degrees(math.atan((math.fabs(pos_H-Resolucao_H/2.0)*Sx)/f))
     
-    Controle_Manual_H(angulo_H,2)
+    Controle_Manual_H(angulo_H,1)
 
     
-def Center_Object_V(pos_V): # 'pos_H' [em pixel] e 'pos_V' [em pixel] definem o local do Objeto no plano da câmera e 'Resolucao_H' [em pixel] e 'Resolucao_V' [em pixel] a resolução da mesma
+def Center_Object_V(pos_V,Resolucao_V): # 'pos_H' [em pixel] e 'pos_V' [em pixel] definem o local do Objeto no plano da câmera e 'Resolucao_H' [em pixel] e 'Resolucao_V' [em pixel] a resolução da mesma
     f=3.04; #Distancia focal da Câmera [em mm]; Informacao no datasheet
     Sx=(1.12*10^-3); # Constante de transformação entre pixel para mm; Informação no datasheet
-    angulo_V=math.degrees(math.acos((1.0*pos_V*Sx)/f))
+    angulo_V=math.degrees(math.atan((math.fabs(pos_V-Resolucao_V/2.0)*Sx)/f))
     
-    Controle_Manual_V(angulo_V,2)
+    Controle_Manual_V(angulo_V,1)
     
     
-def Center_Object(pos_H,pos_V): # 'pos_H' [em pixel] e 'pos_V' [em pixel] definem o local do Objeto no plano da câmera e 'Resolucao_H' [em pixel] e 'Resolucao_V' [em pixel] a resolução da mesma
+def Center_Object(pos_H,pos_V,Resolucao_H,Resolucao_V): # 'pos_H' [em pixel] e 'pos_V' [em pixel] definem o local do Objeto no plano da câmera e 'Resolucao_H' [em pixel] e 'Resolucao_V' [em pixel] a resolução da mesma
     f=3.04; #Distancia focal da Câmera [em mm]; Informacao no datasheet
     Sx=(1.12*10^-3); # Constante de transformação entre pixel para mm; Informação no datasheet
-    angulo_H=math.degrees(math.acos((1.0*pos_H*Sx)/f))
-    angulo_V=math.degrees(math.acos((1.0*pos_V*Sx)/f))
+    angulo_H=math.degrees(math.atan((1.0*math.fabs(pos_H-Resolucao_H/2.0)*Sx)/f))
+    angulo_V=math.degrees(math.atan((1.0*math.fabs(pos_V-Resolucao_V/2.0)*Sx)/f))
     
-    Controle_Manual(angulo_H,angulo_V,2)
+    Controle_Manual(angulo_H,angulo_V,1)
         
 #while True:
 #    Controle_Manual_V(input("Rotacao_V: "),0.5)
