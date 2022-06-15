@@ -31,6 +31,19 @@ pwm.set_mode(servo_V, pigpio.OUTPUT)
 pwm.set_PWM_frequency( servo_V, 50 )
 
 
+def toggle_servo(X):#1-Servo ON; 0 - Servo OFF
+    if (X):
+        pwm.set_mode(servo_H, pigpio.OUTPUT)
+        pwm.set_PWM_frequency( servo_H, 50 )
+        pwm.set_mode(servo_V, pigpio.OUTPUT)
+        pwm.set_PWM_frequency( servo_V, 50 )
+    else:
+        pwm.set_PWM_dutycycle(servo_H, 0)
+        pwm.set_PWM_frequency(servo_H, 0)
+        pwm.set_PWM_dutycycle(servo_V, 0)
+        pwm.set_PWM_frequency(servo_V, 0)
+        flash('Servos OFF');
+
 def func(x): #Retorna o valor em segundos [para o t_{on} do PWM] da rotacao em graus desejada
     return ((90-(-90))/(2000-1000))*x+1500 #Funcao de primeiro grau
 
