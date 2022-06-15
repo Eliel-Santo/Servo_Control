@@ -37,6 +37,7 @@ def toggle_servo(X):#1-Servo ON; 0 - Servo OFF
         pwm.set_PWM_frequency( servo_H, 50 )
         pwm.set_mode(servo_V, pigpio.OUTPUT)
         pwm.set_PWM_frequency( servo_V, 50 )
+        flash('Servos ON')
     else:
         pwm.set_PWM_dutycycle(servo_H, 0)
         pwm.set_PWM_frequency(servo_H, 0)
