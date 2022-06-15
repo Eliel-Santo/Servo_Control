@@ -19,7 +19,7 @@ sudo pigpiod
 As funções externas disponíveis no código são as seguintes:
 
 - toogle_servo(X)
-- --Desliga-se o PWM sendo enviado aos servos. Útil por questões de controle e segurança.
+--Desliga-se o PWM sendo enviado aos servos. Útil por questões de controle e segurança.
 -- Recebe como argumento **X**, para **X**=1 liga-se os servos e para **X**≠1 desliga-se os servos.
 
 - Controle_Manual(angulo_H,angulo_V,slp)
