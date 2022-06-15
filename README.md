@@ -7,15 +7,17 @@ Primeiro instala-se o pacote para o controle do PWM, é necessário permissão d
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install python3-pigpio
-sudo pigpiod```
+sudo pigpiod
+```
 
 Antes de utilizar o código é sempre necessário efetuar o seguinte comando no terminal:
 
 ```console
 sudo pigpiod
 ```
+### Funcões Externas
 
-<details><summary>### Funcões Externas</summary>
+<details><summary>Clique para Expandir</summary>
 
 <p>
 
@@ -55,9 +57,9 @@ Obs: Valores padrão: pos_H, pos_V, Resolucao_H=640, Resolucao_V=480
 Obs: Valores padrão: pos_H, Resolucao_H=640
 
 - Center_Object_V(pos_V,Resolucao_V)
-	A função centraliza no eixo vertical da tela um objeto em uma posição qualquer (pos_H,pos_V).
-	Recebe como argumentos **pos_V, Resolucao_V**, onde **pos_V** define a posição atual do objeto na horizontal e **Resolucao_V** define a resolução da imagem na vertical (quantidade de pixels).
-	Obs: Valores padrão: pos_H, Resolucao_H=480
+	- A função centraliza no eixo vertical da tela um objeto em uma posição qualquer (pos_H,pos_V).
+	- Recebe como argumentos **pos_V, Resolucao_V**, onde **pos_V** define a posição atual do objeto na horizontal e **Resolucao_V** define a resolução da imagem na vertical (quantidade de pixels).
+Obs: Valores padrão: pos_H, Resolucao_H=480
 
 </p>
 
