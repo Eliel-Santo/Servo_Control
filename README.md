@@ -1,6 +1,26 @@
+# Servo_Control
+Programa para controle dos servo motores da disciplina de "Projetos de Sistemas Digitais". Feito para uso em Raspberry Pi. Funciona numa Raspberry Pi modelo 3B+.
+
+Primeiro instala-se o pacote para o controle do PWM, é necessário permissão de sudo.
+
+```console
+sudo apt-get update```
+```console
+sudo apt-get upgrade```
+```console
+sudo apt-get install python3-pigpio```
+```console
+sudo pigpiod```
+
+Antes de utilizar o código é sempre necessário efetuar o seguinte comando no terminal:
+
+```console
+sudo pigpiod
+```
+
 <details><summary>Funcões Externas</summary>
+
 <p>
-### Funções
 
 As funções externas disponíveis no código são as seguintes:
 
@@ -38,10 +58,39 @@ Obs: Valores padrão: pos_H, pos_V, Resolucao_H=640, Resolucao_V=480
 Obs: Valores padrão: pos_H, Resolucao_H=640
 
 - Center_Object_V(pos_V,Resolucao_V)
---A função centraliza no eixo vertical da tela um objeto em uma posição qualquer (pos_H,pos_V). 
---Recebe como argumentos **pos_V, Resolucao_V**, onde **pos_V** define a posição atual do objeto na horizontal e **Resolucao_V** define a resolução da imagem na vertical (quantidade de pixels).
+  -A função centraliza no eixo vertical da tela um objeto em uma posição qualquer (pos_H,pos_V). 
+  -Recebe como argumentos **pos_V, Resolucao_V**, onde **pos_V** define a posição atual do objeto na horizontal e **Resolucao_V** define a resolução da imagem na vertical (quantidade de pixels).
 Obs: Valores padrão: pos_H, Resolucao_H=480
 
 </p>
 
 </details>
+
+### Definições dos Servos
+Os servo motores sendo utilizados são controlados via Pulse Width Modulation (PWM) e possuem um eixo de rotação de -90º até 90º, onde as larguras dos pulsos respectivos são: 1ms até 2ms. O período do pulso deve ser de 20ms (50 Hz). É utilizado o modelo SG90 e o seu datasheet pode ser encontrado na pasta de anexos ou um link direto esta disponível na referências.
+
+### Definições da Câmera
+Utilizou-se uma camêra para a centralização do objeto na imagem. O modelo utilizado foi o "Camera Module v2". Onde utilizou-se o tamanho de pixel de 0.0012 mm (tanto pra largura quanto pro comprimento) e distância focal de 3.04 mm.
+
+---
+### Referências
+                
+1. Datasheet dos Servo Motores (SG90): 
+https://www.datasheet4u.com/datasheet-pdf/TowerPro/SG90/pdf.php?id=791970
+2. Definições da Câmera (Modelo v2):
+https://www.raspberrypi.com/documentation/accessories/camera.html
+3. Documentação da Biblioteca pigpio:
+http://abyz.me.uk/rpi/pigpio/python.html#set_servo_pulsewidth
+
+                
+----
+
+### Links Úteis
+
++ Edição do Readme.md
+	+ https://pandao.github.io/editor.md/en.html
+	+ https://docs.github.com/pt/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
+
++ Explicação sucinta do Pigpio
+	+ https://ben.akrin.com/raspberry-pi-servo-jitter/
+                    
