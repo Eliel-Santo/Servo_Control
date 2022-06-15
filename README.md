@@ -5,6 +5,7 @@ Primeiro instala-se o pacote para o controle do PWM, é necessário permissão d
 
 `
 sudo apt-get update && sudo apt-get install python3-pigpio
+
 sudo pigpiod
 `
 
@@ -20,11 +21,11 @@ As funções disponíveis no código são as seguintes:
 
 - toogle_servo(X) - Recebe como argumento X, para X=1 liga-se os servos e para X≠1 desliga-se os servos. 
 
-- Controle_Manual(
+- Controle_Manual(angulo_H,angulo_V,slp)
 
-- Controle_Manual_H
+- Controle_Manual_H(angulo_H,slp)
 
-- Controle_Manual_V
+- Controle_Manual_V(angulo_V,slp)
 
 - Varredura_Servos
 
