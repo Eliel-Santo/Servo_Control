@@ -49,7 +49,7 @@ def func(x): #Retorna o valor em segundos [para o t_{on} do PWM] da rotacao em g
     return (2000-1000)/(90-(-90)))*x+1500 #Funcao de primeiro grau: P0=(-90,1000),P1=(0,1500) e P2=(2000,90)
 
 def inv_func(y): #Retorna o valor em graus de um dutycycle em segundos
-    return (y-1500)*180 
+    return (y-1500.0)*180.0 
 
 
 def checa_angulo(angulo_V=0,angulo_H=0):#Retorna 0 se estiver errado e flash o periodo correto dos angulos; Retorna 1 se correto;
