@@ -27,6 +27,12 @@ As funções externas disponíveis no código são as seguintes:
 	- Desliga-se o PWM sendo enviado aos servos. Útil por questões de controle e segurança.
 	- Recebe como argumento **X**, para **X**=1 liga-se os servos e para **X**≠1 desliga-se os servos.
 
+- Angulo_Atual_V()
+	- Retorna o ângulo atual referente ao PWM sendo exercido ao Servo_V.
+
+- Angulo_Atual_H()
+	- Retorna o ângulo atual referente ao PWM sendo exercido ao Servo_H.
+
 - Controle_Manual(angulo_H,angulo_V,slp)
 	- Define a posição onde deve-se posicionar o servo motor, tanto na horizontal quanto na vertical.
 	- Recebe como argumentos **angulo_H, angulo_V, slp**, onde **angulo_H** define a posição em ângulo do servo_H, **angulo_V** define a posição do ângulo do servo_V e **slp** define o tempo de espera após a rotação.
