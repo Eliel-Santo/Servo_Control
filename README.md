@@ -81,6 +81,10 @@ Utilizou-se uma camêra para a centralização do objeto na imagem. O modelo uti
 O eixo a ser considerado no Opencv para a aplicação na função de centralização pode ser observado abaixo:
 ![alt text](https://github.com/Eliel-Santo/Servo_Control/blob/main/Anexos/4iFEV.png?raw=true "Eixo representado do Opencv")
 
+<p align="center">
+  <img width="460" height="300" src="https://github.com/Eliel-Santo/Servo_Control/blob/main/Anexos/4iFEV.png?raw=true">
+</p>
+
 ---
 ### Referências
                 
