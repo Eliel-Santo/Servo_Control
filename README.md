@@ -75,7 +75,11 @@ Obs: Valores padrão: pos_H, Resolucao_H=480
 Os servo motores sendo utilizados são controlados via Pulse Width Modulation (PWM) e possuem um eixo de rotação de -90º até 90º, onde as larguras dos pulsos respectivos são: 1ms até 2ms. O período do pulso deve ser de 20ms (50 Hz). É utilizado o modelo SG90 e o seu datasheet pode ser encontrado na pasta de anexos ou um link direto esta disponível na referências.
 
 ### Definições da Câmera
-Utilizou-se uma camêra para a centralização do objeto na imagem. O modelo utilizado foi o "Camera Module v2". Onde utilizou-se o tamanho de pixel de 0.0012 mm (tanto pra largura quanto pro comprimento) e distância focal de 3.04 mm.
+Utilizou-se uma camêra para a centralização do objeto na imagem. O modelo utilizado foi o "Camera Module v2". Onde utilizou-se o tamanho de pixel de 0.0012 mm (tanto pra largura quanto pro comprimento) e distância focal de 3.04 mm. É utilizado o modelo V2 e o seu datasheet pode ser encontrado na pasta de anexos ou um link direto esta disponível na referências.
+
+### Eixo Considerado no Opencv
+O eixo a ser considerado no Opencv para a aplicação na função de centralização pode ser observado abaixo:
+![alt text](https://github.com/Eliel-Santo/Servo_Control/blob/main/Anexos/4iFEV.png?raw=true "Eixo representado do Opencv")
 
 ---
 ### Referências
@@ -86,6 +90,8 @@ https://www.datasheet4u.com/datasheet-pdf/TowerPro/SG90/pdf.php?id=791970
 https://www.raspberrypi.com/documentation/accessories/camera.html
 3. Documentação da Biblioteca pigpio:
 http://abyz.me.uk/rpi/pigpio/python.html#set_servo_pulsewidth
+4. Imagem do eixo do Opencv:
+https://stackoverflow.com/questions/9081900/reference-coordinate-system-changes-between-opencv-opengl-and-android-sensor
 
                 
 ----
@@ -96,7 +102,11 @@ http://abyz.me.uk/rpi/pigpio/python.html#set_servo_pulsewidth
 	+ https://pandao.github.io/editor.md/en.html
 	+ https://docs.github.com/pt/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
 	+ https://github.com/tchapi/markdown-cheatsheet/blob/master/README.md
+	+ https://stackoverflow.com/questions/14494747/how-to-add-images-to-readme-md-on-github
 
 + Explicação sucinta do Pigpio
 	+ https://ben.akrin.com/raspberry-pi-servo-jitter/
+
++ Eixos do Opencv 
+	+ https://stackoverflow.com/questions/25642532/opencv-pointx-y-represent-column-row-or-row-column
                     
