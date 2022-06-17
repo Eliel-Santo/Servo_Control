@@ -123,10 +123,10 @@ def Varredura_Servos(x,passo=20): # 'x' equivale a tempo [em segundos] de varred
 
 #https://abyz.me.uk/rpi/pigpio/pdif2.html
 
-def Angulo_Atual_V()
+def Angulo_Atual_V()#Retorna o angulo atual do servo motor vertical
     return inv_func(pwm.get_servo_pulsewidth(servo_V))
 
-def Angulo_Atual_H()
+def Angulo_Atual_H()#Retorna o angulo altual do servo motor horizontal
     return inv_func(pwm.get_servo_pulsewidth(servo_H))
         
 def Center_Object_H(pos_H,Resolucao_H=640): # 'pos_H' [em pixel] e 'pos_V' [em pixel] definem o local do Objeto no plano da câmera e 'Resolucao_H' [em pixel] e 'Resolucao_V' [em pixel] a resolução da mesma
@@ -145,9 +145,9 @@ def Center_Object_V(pos_V,Resolucao_V=480): # 'pos_H' [em pixel] e 'pos_V' [em p
 
     Angulo_Atual=inv_func(pwm.get_servo_pulsewidth(servo_V)) 
     if pos_V>=Resolucao_V/2.0:
-        Sinal=1.0
-    else:
         Sinal=-1.0
+    else:
+        Sinal=1.0
 
     angulo_V=Angulo_Atual+Sinal*math.degrees(math.atan((math.fabs(pos_V-Resolucao_V/2.0)*Sx)/f))
     
@@ -164,9 +164,9 @@ def Center_Object(pos_H,pos_V,Resolucao_H=640,Resolucao_V=480): # 'pos_H' [em pi
         Sinal_H=-1.0
 
     if pos_V>=Resolucao_V/2.0:
-        Sinal_V=1.0
-    else:
         Sinal_V=-1.0
+    else:
+        Sinal_V=1.0
 
     angulo_H=Angulo_Atual_H+Sinal_H*math.degrees(math.atan((1.0*math.fabs(pos_H-Resolucao_H/2.0)*Sx)/f))
     angulo_V=Angulo_Atual_V+Sinal_V*math.degrees(math.atan((1.0*math.fabs(pos_V-Resolucao_V/2.0)*Sx)/f))
@@ -175,3 +175,5 @@ def Center_Object(pos_H,pos_V,Resolucao_H=640,Resolucao_V=480): # 'pos_H' [em pi
         
 #while True:
 #    Controle_Manual_V(input("Rotacao_V: "),0.5)
+#    Controle_Manual_H(input("Rotacao_H: "),0.5)
+#    Controle_Manual(input("Rotacao_H: "),(input("Rotacao_H: "),0.5)
