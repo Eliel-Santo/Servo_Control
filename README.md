@@ -82,7 +82,7 @@ O eixo a ser considerado no Opencv para a aplicação na função de centraliza�
 ![alt text](https://github.com/Eliel-Santo/Servo_Control/blob/main/Anexos/4iFEV.png?raw=true "Eixo representado do Opencv")
 
 <p align="center">
-  <img width="460" height="300" src="https://github.com/Eliel-Santo/Servo_Control/blob/main/Anexos/4iFEV.png?raw=true">
+  <img src="https://github.com/Eliel-Santo/Servo_Control/blob/main/Anexos/4iFEV.png?raw=true">
 </p>
 
 ---
