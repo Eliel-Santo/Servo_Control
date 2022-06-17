@@ -79,7 +79,6 @@ Utilizou-se uma camêra para a centralização do objeto na imagem. O modelo uti
 
 ### Eixo Considerado no Opencv
 O eixo a ser considerado no Opencv para a aplicação na função de centralização pode ser observado abaixo:
-![alt text](https://github.com/Eliel-Santo/Servo_Control/blob/main/Anexos/4iFEV.png?raw=true "Eixo representado do Opencv")
 
 <p align="center">
   <img src="https://github.com/Eliel-Santo/Servo_Control/blob/main/Anexos/4iFEV.png?raw=true">
@@ -107,10 +106,12 @@ https://stackoverflow.com/questions/9081900/reference-coordinate-system-changes-
 	+ https://docs.github.com/pt/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
 	+ https://github.com/tchapi/markdown-cheatsheet/blob/master/README.md
 	+ https://stackoverflow.com/questions/14494747/how-to-add-images-to-readme-md-on-github
+	+ https://gist.github.com/DavidWells/7d2e0e1bc78f4ac59a123ddf8b74932d
 
 + Explicação sucinta do Pigpio
 	+ https://ben.akrin.com/raspberry-pi-servo-jitter/
 
 + Eixos do Opencv 
 	+ https://stackoverflow.com/questions/25642532/opencv-pointx-y-represent-column-row-or-row-column
+	+ https://stackoverflow.com/questions/9081900/reference-coordinate-system-changes-between-opencv-opengl-and-android-sensor
                     
