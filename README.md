@@ -78,7 +78,7 @@ Os servo motores sendo utilizados são controlados via Pulse Width Modulation (P
 Utilizou-se uma camêra para a centralização do objeto na imagem. O modelo utilizado foi o "Camera Module v2". Onde utilizou-se o tamanho de pixel de 0.0012 mm (tanto pra largura quanto pro comprimento) e distância focal de 3.04 mm. É utilizado o modelo V2 e o seu datasheet pode ser encontrado na pasta de anexos ou um link direto esta disponível na referências.
 
 ### Eixo Considerado no Opencv
-O eixo a ser considerado no Opencv para a aplicação na função de centralização pode ser observado abaixo:
+O eixo a ser considerado no Opencv para a aplicação na função de centralização pode ser observado abaixo. Há porém de se considerar que a origem do eixo (ponto (0,0)) está localizado no canto superior esquerdo, ao invés do centro da imagem.
 
 <p align="center">
   <img src="https://github.com/Eliel-Santo/Servo_Control/blob/main/Anexos/4iFEV.png?raw=true">
