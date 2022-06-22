@@ -123,10 +123,10 @@ def Varredura_Servos(x,passo=20): # 'x' equivale a tempo [em segundos] de varred
 
 #https://abyz.me.uk/rpi/pigpio/pdif2.html
 
-def Angulo_Atual_V()#Retorna o angulo atual do servo motor vertical
+def Angulo_Atual_V():#Retorna o angulo atual do servo motor vertical
     return inv_func(pwm.get_servo_pulsewidth(servo_V))
 
-def Angulo_Atual_H()#Retorna o angulo altual do servo motor horizontal
+def Angulo_Atual_H():#Retorna o angulo altual do servo motor horizontal
     return inv_func(pwm.get_servo_pulsewidth(servo_H))
         
 def Center_Object_H(pos_H,Resolucao_H=640): # 'pos_H' [em pixel] e 'pos_V' [em pixel] definem o local do Objeto no plano da câmera e 'Resolucao_H' [em pixel] e 'Resolucao_V' [em pixel] a resolução da mesma
