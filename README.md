@@ -87,7 +87,7 @@ O eixo a ser considerado no Opencv para a aplicação na função de centraliza�
 
 ### Level Shifter
 
-Os servo motores que estão sendo utilizados operam com 5V, tanto para a alimentação, quanto para o controle do PWM. É possível controlar com tensões menores, porém com menos confiabilidade, logo recomenda-se a utilização de 5V para o controle nos pinos do PWM. Como a Raspberry Pi modelo B+ que está sendo utilizada possui o controle de PWM com tensão de 3.3V é necessário um level shifter para o aumento dessa tensão, logo utiliza-se o circuito abaixo:
+Os servo motores que estão sendo utilizados operam com 5V, tanto para a alimentação, quanto para o controle do PWM. É possível controlar com tensões menores, porém com menos confiabilidade, logo recomenda-se a utilização de 5V para o controle nos pinos do PWM. Como a Raspberry Pi modelo B+ que está sendo utilizada possui o controle de PWM com tensão de 3.3V é necessário um level shifter para o aumento dessa tensão, logo utiliza-se o circuito abaixo, recomenda-se a conexão do pino de terra da Raspberry com o terra da fonte de alimentação de 5V caso não utilize a fonte de 3.3V da Raspberry.
 
 <p align="center">
   <img src="https://github.com/Eliel-Santo/Servo_Control/blob/main/Anexos/Level_Shifter.jpg?raw=true">
