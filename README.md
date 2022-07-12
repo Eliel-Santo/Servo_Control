@@ -96,9 +96,10 @@ Para a centralização de objeto considera-se o eixo previamente discutido, ent�
 
 Para encontrar os ângulos basta considerar que é um triângulo retângulo e então pode-se aplicar a seguinte equação, levando em consideração os valores da distância focal e do tamanho dos píxeis obtidos no datasheet da câmera.
 
-+Equações:
-	+Novo_Angulo_X=Angulo_Atual_X + k*atan(1.0*(Posicao_Atual_X-Resolucao_X/2.0)*Sx)/f
-	+Novo_Angulo_Y=Angulo_Atual_Y - k*atan(1.0*(Posicao_Atual_Y-Resolucao_Y/2.0)*Sy)/f
++ Equações:
+	+ Novo_Angulo_X=Angulo_Atual_X + k * atan(1.0 * (Posicao_Atual_X-Resolucao_X/2.0) * Sx)/f
+	+ Novo_Angulo_X=Angulo_Atual_X + k * atan(1.0 * (Posicao_Atual_X-Resolucao_X/2.0) * Sx)/f
+
 
 Para a definição de 'k' recomenda-se que se realizem alguns testes e então ir adaptando o valor para obter a melhor precisão, para esse experimento o valor 'k = 5.0' funcionou perfeitamente. Há também de se atentar ao sinal empregado ao novo ângulo, nesse caso notou-se que foi necessário o sinal negativo no eixo vertical (Y). Sx e Sy servem para transformar o valor de pixel para milímetros.
 
