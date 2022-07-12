@@ -9,7 +9,13 @@ sudo apt-get install python3-pigpio
 sudo pigpiod
 ```
 
-# Iniciar servidor
+# Instalar Requerimentos
+
+```bash
+pip install -r requirements.txt
+```
+
+# Iniciar Servidor
 ```bash
 export FLASK_APP=vigisel.py
 flask run --host 0.0.0.0
@@ -69,7 +75,7 @@ db.session.commit()
 Obter a referência para o objeto do usuário e alterar o campo desejado:
 ```python
 u = User.query.filter_by(email='vigisel@gmail.com').first()
-u.role = role_moderator
+u.role = role_admin
 db.session.commit()
 ```
 
