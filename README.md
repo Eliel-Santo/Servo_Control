@@ -111,6 +111,21 @@ Os servo motores que estão sendo utilizados operam com 5V, tanto para a aliment
   <img src="https://github.com/Eliel-Santo/Servo_Control/blob/main/Anexos/Level_Shifter.jpg?raw=true">
 </p>
 
+### Tilt dos Servo Motores
+
+O seguinte tilt foi o utilzado para a montagem dos servo motores:
+
+<p align="center">
+  <img src="https://github.com/Eliel-Santo/Servo_Control/blob/main/Anexos/Pan%20Tilt%20Kit%20for%20Servo%20Motors%20Tilt%20Camera%20or%20Sensor%20-%20Twins%20Chip%203.jpg?raw=true">
+</p>
+
+
+### Possíveis Erros
+
+É possível que a depender de como sejam utilizadas as funções aqui contidas assim que for utilizar o controle dos servo motores apareça um erro similar a "Error: GPIO not initialized" ou "Error: GPIO not in PWM mode", essencialmente indica que foi tentando obter alguma informação que não é possível pois o GPIO da Raspberry não está no modo PWM. Geralmente ocorre quando tenta-se utilizar uma função que tenta obter o ângulo atual do motor sem que antes tenha definido um ângulo para o mesmo. Por exemplo, caso tente utilizar a função Angulo_Atual_V() sem antes ter definido algum ângulo, como por exemplo "Controle_Manual_V(10,1)". Uma forma simples de circunventar esse erro é definir os motores para uma posição inicial assim que se iniciar o código.
+
+Embora seja definido nesse readme que os motores rotacionam de [-90°,90°] (total de 180°) na realidade eles estão limitados em sua rotação, somente rotacionando um total de 90° [-45°,45°]. Isso é devido a problemas encontrados durante o projeto pois em algumas circunstâncias onde o motor era sujeito a valores próximos de seus extremos havia então um pico de corrente, como limitavamos a corrente da fonte de tensão não sabemos ao certo o valor máximo mas recomenda-se limitar a fonte em no máximo 0,5A, quando alcançava então esse pico de corrente ele então estabilizava nesse valor alto. Para evitar danos aos motores foi então decidido limitar a operação para valores "seguros", foi-se utilizada a seguinte faixa para variação do PWM [1000 µs,20000 µs] considerando uma frequência de 50Hz (período de 20ms).
+
 ---
 ### Referências
                 
@@ -122,6 +137,8 @@ https://www.raspberrypi.com/documentation/accessories/camera.html
 http://abyz.me.uk/rpi/pigpio/python.html#set_servo_pulsewidth
 4. Imagem do eixo do Opencv:
 https://stackoverflow.com/questions/9081900/reference-coordinate-system-changes-between-opencv-opengl-and-android-sensor
+5. Imagem do Tilt do Servo Motores:
+https://www.twinschip.com/Pan-Tilt-Kit-for-Servo-Motors-Tilt-Camera-or-Sensor
 
                 
 ----
@@ -140,5 +157,4 @@ https://stackoverflow.com/questions/9081900/reference-coordinate-system-changes-
 
 + Eixos do Opencv 
 	+ https://stackoverflow.com/questions/25642532/opencv-pointx-y-represent-column-row-or-row-column
-	+ https://stackoverflow.com/questions/9081900/reference-coordinate-system-changes-between-opencv-opengl-and-android-sensor
-                    
+	+ https://stackoverflow.com/questions/9081900/reference-coordinate-system-changes-between-opencv-opengl-and-android-sensor                   
