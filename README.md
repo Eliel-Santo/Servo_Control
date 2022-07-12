@@ -48,7 +48,7 @@ Obs: Valores padrão: angulo_H=0,slp=1
 	- Recebe como argumentos **angulo_V, slp**, onde **angulo_H** define a posição em ângulo do servo_V e **slp** define o tempo de espera após a rotação.
 Obs: Valores padrão: angulo_V=0,slp=1
 
-- Varredura_Servos(x,passo)
+- Old_Varredura_Servos(x,passo)
 	- Recebe como argumentos **x, passo**, onde **x** define o tempo em segundos da varredura e passo define a quantidade de passos a serem realizados durante a varredura, por exemplo, para uma varredura de 10 segundos e 40 passos, serão realizados 20 movimentos do servo motor em 5 segundos, até um extremo e depois 20 movimentos do servo motor em 5 segundos para a posição original.
 Obs: Valores padrão: passo=20. Somente movimenta o servo_H.
 
@@ -67,6 +67,8 @@ Obs: Valores padrão: pos_H, Resolucao_H=640
 	- Recebe como argumentos **pos_V, Resolucao_V**, onde **pos_V** define a posição atual do objeto na horizontal e **Resolucao_V** define a resolução da imagem na vertical (quantidade de pixels).
 Obs: Valores padrão: pos_H, Resolucao_H=480
 
+- Adendo: As funções Varredura_Servos, teste, comeca_varredura e para_varredura são funções que foram criadas para utilizar uma variável global 'Varre' de forma a possibilitar que a varredura dos servos, uma função que estaria em primero plano e sendo constantemente utilizada por 'x' segundos assim que chamada, pudesse ser utilizada em conjunto com o restante do projeto disponível em "https://github.com/vcs512/rasp-iot". Dessa forma, com a variável global, pode-se monitorar o estado da varredura de forma a poder criar um novo processo na máquina e então finaliza-lo assim que houver o termino da varredura, via o uso da biblioteca "multiprocessing" do Python.
+
 </p>
 
 </details>
@@ -75,7 +77,7 @@ Obs: Valores padrão: pos_H, Resolucao_H=480
 Os servo motores sendo utilizados são controlados via Pulse Width Modulation (PWM) e possuem um eixo de rotação de -90º até 90º, onde as larguras dos pulsos respectivos são: 1ms até 2ms. O período do pulso deve ser de 20ms (50 Hz). É utilizado o modelo SG90 e o seu datasheet pode ser encontrado na pasta de anexos ou um link direto esta disponível na referências.
 
 ### Definições da Câmera
-Utilizou-se uma camêra para a centralização do objeto na imagem. O modelo utilizado foi o "Camera Module v2". Onde utilizou-se o tamanho de pixel de 0.0012 mm (tanto pra largura quanto pro comprimento) e distância focal de 3.04 mm. É utilizado o modelo V2 e o seu datasheet pode ser encontrado na pasta de anexos ou um link direto esta disponível na referências.
+Utilizou-se uma camêra para a centralização do objeto na imagem. O modelo utilizado foi o "Camera Module v2". Onde utilizou-se o tamanho de pixel de Sy = Sx = 0.0012 mm (tanto pra largura quanto pro comprimento) e distância focal de f = 3.04 mm. É utilizado o modelo V2 e o seu datasheet pode ser encontrado na pasta de anexos ou um link direto esta disponível na referências.
 
 ### Eixo Considerado no Opencv
 O eixo a ser considerado no Opencv para a aplicação na função de centralização pode ser observado abaixo. Há porém de se considerar que a origem do eixo (ponto (0,0)) está localizado no canto superior esquerdo, ao invés do centro da imagem.
@@ -84,6 +86,21 @@ O eixo a ser considerado no Opencv para a aplicação na função de centraliza�
   <img src="https://github.com/Eliel-Santo/Servo_Control/blob/main/Anexos/4iFEV.png?raw=true">
 </p>
 
+### Centralização de Objeto
+
+Para a centralização de objeto considera-se o eixo previamente discutido, então obtêm-se a sua posição na tela, assim como a resolução da tela. Com base nesses dados busca-se centralizar o objeto na tela, logo pretende-se posiciona-lo no ponto (Resolução_Horizontal/2, Resolução_Vertical/2), portanto utiliza-se esse ponto como referência no cálculo. Dessa forma obtêm-se a distância angular em cada eixo do objeto a ser centralizado, de forma como está demonstrado na imagem abaixo. 
+
+<p align="center">
+  <img src="https://github.com/Eliel-Santo/Servo_Control/blob/main/Anexos/Centralizar.png?raw=true">
+</p>
+
+Para encontrar os ângulos basta considerar que é um triângulo retângulo e então pode-se aplicar a seguinte equação, levando em consideração os valores da distância focal e do tamanho dos píxeis obtidos no datasheet da câmera.
+
++Equações:
+	+Novo_Angulo_X=Angulo_Atual_X + k*atan(1.0*(Posicao_Atual_X-Resolucao_X/2.0)*Sx)/f
+	+Novo_Angulo_Y=Angulo_Atual_Y - k*atan(1.0*(Posicao_Atual_Y-Resolucao_Y/2.0)*Sy)/f
+
+Para a definição de 'k' recomenda-se que se realizem alguns testes e então ir adaptando o valor para obter a melhor precisão, para esse experimento o valor 'k = 5.0' funcionou perfeitamente. Há também de se atentar ao sinal empregado ao novo ângulo, nesse caso notou-se que foi necessário o sinal negativo no eixo vertical (Y). Sx e Sy servem para transformar o valor de pixel para milímetros.
 
 ### Level Shifter
 
