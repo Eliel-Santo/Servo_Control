@@ -15,7 +15,7 @@ Antes de utilizar o código é sempre necessário efetuar o seguinte comando no 
 ```console
 sudo pigpiod
 ```
-O código foi desenvolvivo para uso na disciplina supracitada, o controle dos motores foi realizado via um site, e por isso utilizou-se o flask para enviar mensagens de erro para o site, caso isso não seja necessário pode-se simplesmente comentar as linhas com "flash()" e o importa do flask, caso pretenda utilizar o flask é necessário a instalação do mesmo:
+O código foi desenvolvivo para uso na disciplina supracitada, o controle dos motores foi realizado via um site, e por isso utilizou-se o flask para enviar mensagens de erro para o site, caso isso não seja necessário pode-se simplesmente comentar as linhas com "flash()" e o import do flask, caso pretenda utilizar o flask é necessário a instalação do mesmo:
 
 ```console
 sudo apt install flask
